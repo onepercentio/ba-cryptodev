@@ -1,0 +1,28 @@
+{
+  "name": "ba-cryptodev",
+  "version": "1.0.0",
+  "description": "Crypto Developers Training Course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onepercentio/ba-cryptodev.git"
+  },
+  "keywords": [
+    "crypto",
+    "blockchain",
+    "ethereum"
+  ],
+  "author": "OnePercent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onepercentio/ba-cryptodev/issues"
+  },
+  "homepage": "https://github.com/onepercentio/ba-cryptodev#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2"
+  }
+}
