@@ -7,36 +7,52 @@ describe('The greetings contract', function () {
   let greeter
 
   beforeEach(async () => {
-    [deployer] = await ethers.getSigners()
+    [deployer, user, badActor] = await ethers.getSigners()
 
     const Factory = await ethers.getContractFactory('Greeter')
-    const factory = await Factory.deploy()
+    const factory = await Factory.deploy('Hello, ')
 
     greeter = await factory.deployed()
   })
 
   describe('when calling the greeter fn', () => {
 
-    it('should correctly return a generic greeting', async () => {
-      const greetings = await greeter.greet()
+    it('should correctly return the greeting', async () => {
+      const greetings = await greeter.greet('human')
 
       expect(greetings).to.eql('Hello, human!')
     })
 
-    it('should correctly greet me', async () => {
-      const myName = 'CHUCK NORRIS'
-      const greetings = await greeter.greet()
+    it('should fail if update is called without a payment', async () => {
+      await expect(
+        greeter.updateGreeting('Hi, '),
+        'You should pay at least 1 ETH do update the greeting'
+      )
 
-      expect(greetings).to.eql(`Hello, ${myName}!`)
+      const greetings = await greeter.greet('Chuck Norris')
+
+      expect(greetings).to.eql('Hello, Chuck Norris!')
     })
 
-    it('should allow me to update the greeting string')
+    it('should correctly update the greeting', async () => {
+      const oneEther = ethers.utils.parseEther('1')
 
-    it('should allow me to update the subject name only')
+      await expect(
+        greeter.connect(user).updateGreeting('Hi, ', { value: oneEther })
+      ).to.changeEtherBalance(user, `-${oneEther}`)
 
-    it('should fail if update is called by an unauthorized account')
+      expect(await ethers.provider.getBalance(greeter.address)).to.eq(0)
 
-    it('should greet anyone in a decentralized way')
+      const greetings = await greeter.greet('Chuck Norris')
+
+      expect(greetings).to.eql('Hi, Chuck Norris!')
+    })
+
+  })
+
+  describe('when splitting earnings', () => {
+
+    it('should allow the owner to split earnings with users')
 
   })
 

@@ -6,17 +6,23 @@ pragma solidity 0.8.17;
 
 contract Greeter {
 
-    constructor() {
+    address payable public owner;
+    string public greeting;
+
+    constructor(string memory _greeting) {
+        greeting = _greeting;
+        owner = payable(msg.sender);
     }
 
-    function greet() view public returns (string memory) {
+    function greet(string memory _name) view public returns (string memory) {
+        return string.concat(greeting, _name, "!");
     }
 
-    // update subject
+    function updateGreeting(string memory _newGreeting) public payable {
+        require(msg.value >= 1 ether, "You should pay at least 1 ETH do update the greeting");
+
+        owner.transfer(msg.value);
+
+        greeting = _newGreeting;
+    }
 }
-
-// 1. Implementar construtor
-// 2. Implementar greeter
-// 3. Implementar inicialização de greeting
-// 3. Implementar fn para atualizar greeting
-// 4. Atualizar greeter fn para concatenar Olá, { subject }, tudo bem?

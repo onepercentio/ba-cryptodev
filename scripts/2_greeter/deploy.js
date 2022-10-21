@@ -9,7 +9,7 @@ const hre = require('hardhat')
 async function main() {
   console.info('Starting Greeter deployment')
   const Factory = await hre.ethers.getContractFactory('Greeter')
-  const factory = await Factory.deploy()
+  const factory = await Factory.deploy('Hello, ')
 
   const greeter = await factory.deployed()
 

@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-require('@nomicfoundation/hardhat-toolbox');
+require('@nomicfoundation/hardhat-toolbox')
 require('hardhat-watcher')
 
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -27,5 +27,10 @@ module.exports = {
       },
       network_id: 80001
     }
-  }
+  },
+  etherscan: {
+    apiKey: {
+      polygonMumbai: process.env.POLYGON_ETHERSCAN_API_KEY,
+    }
+  },
 }
