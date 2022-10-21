@@ -18,6 +18,8 @@ contract Greeter {
         return string.concat(greeting, _name, "!");
     }
 
+    error PaymentRequired(uint256 required, uint256 sent);
+
     function updateGreeting(string memory _newGreeting) public payable {
         require(msg.value >= 1 ether, "You should pay at least 1 ETH do update the greeting");
 
