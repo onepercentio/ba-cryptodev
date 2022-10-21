@@ -16,5 +16,6 @@ pragma abicoder v2;
 
 // importação de contratos: importante para a modularização do código; durante a compilação, todos os contratos são anexados e geram um único bytecode
 import "hardhat/console.sol";
+import "../2_greeter/Greetings.sol";
 
 contract LayoutContract {}

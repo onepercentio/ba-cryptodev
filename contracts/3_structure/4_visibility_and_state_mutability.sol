@@ -7,6 +7,7 @@ contract Visibility {
     address[] internal balances;
     uint256 private maxDepositAmount;
     string name; // padrão: internal
+    address payable public coinbase;
 
     function externalOnly() external {}
 
@@ -25,7 +26,7 @@ contract StateMutability {
 
     function readStateOnly() view public {}
 
-    function onlyLogic() pure public {}
+    function onlyLogic(uint256 num) pure public returns(uint256) {}
 
     function receivesETH() payable public {}
 
