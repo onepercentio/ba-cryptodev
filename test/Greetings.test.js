@@ -23,11 +23,11 @@ describe('The greetings contract', function () {
       expect(greetings).to.eql('Hello, human!')
     })
 
-    it.only('should fail if update is called without a payment', async () => {
+    it('should fail if update is called without a payment', async () => {
       await expect(
         greeter.updateGreeting('Hi, ')
       ).to.be.revertedWith(
-        'You should pay at least 1 ETH do update the greeting'
+        'You should pay at least 1 ETH to update the greeting'
       )
 
       const greetings = await greeter.greet('Chuck Norris')
