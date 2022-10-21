@@ -37,12 +37,17 @@ describe('The greetings contract', function () {
 
     it('should correctly update the greeting', async () => {
       const oneEther = ethers.utils.parseEther('1')
+      const previousOwnerBalance = await ethers.provider.getBalance(deployer.address)
 
       await expect(
         greeter.connect(user).updateGreeting('Hi, ', { value: oneEther })
       ).to.changeEtherBalance(user, `-${oneEther}`)
 
       expect(await ethers.provider.getBalance(greeter.address)).to.eq(0)
+
+      expect(await ethers.provider.getBalance(deployer.address)).to.eq(
+        previousOwnerBalance.add(oneEther)
+      )
 
       const greetings = await greeter.greet('Chuck Norris')
 

@@ -25,6 +25,7 @@ contract Greeter {
 
         greeting = _newGreeting;
     }
+
 }
 
 
