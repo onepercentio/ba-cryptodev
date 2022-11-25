@@ -126,3 +126,6 @@ typechain-types
 cache
 artifacts
 
+#ZKSync folders
+artifacts-zk
+cache-zk

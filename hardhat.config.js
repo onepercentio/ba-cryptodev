@@ -3,11 +3,31 @@ require('dotenv').config()
 require('@nomicfoundation/hardhat-toolbox')
 require('hardhat-watcher')
 
+require("@matterlabs/hardhat-zksync-deploy");
+require("@matterlabs/hardhat-zksync-solc");
+
 const GANACHE_MNEMONIC = 'vague transfer holiday basket rent shop future wing want employ cry evidence'
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: '0.8.17',
+  zksolc: {
+    version: "1.2.0",
+    compilerSource: "binary",
+    settings: {
+      optimizer: {
+        enabled: true,
+      },
+      experimental: {
+        dockerImage: "matterlabs/zksolc",
+        tag: "v1.2.0",
+      },
+    },
+  },
+  zkSyncDeploy: {
+    zkSyncNetwork: "https://zksync2-testnet.zksync.dev",
+    ethNetwork: process.env.RPC_PROVIDER,
+  },
   watcher: {
     compile: {
       tasks: ['compile'],
@@ -36,7 +56,10 @@ module.exports = {
         initialIndex: 0
       },
       network_id: 80001
-    }
+    },
+    hardhat: {
+      zksync: true,
+    },
   },
   etherscan: {
     apiKey: {
