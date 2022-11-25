@@ -7,8 +7,6 @@ import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 
-import "hardhat/console.sol";
-
 contract MyERC1155 is ERC1155, ERC1155Burnable, ERC1155Supply, AccessControl, Pausable {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
