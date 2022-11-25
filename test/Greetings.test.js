@@ -56,10 +56,4 @@ describe('The greetings contract', function () {
 
   })
 
-  describe('when splitting earnings', () => {
-
-    it('should allow the owner to split earnings with users')
-
-  })
-
 });
